@@ -7,5 +7,5 @@ import App from './app';
 // function App(){
 //   return <div>welcom</div>
 // }
-
+console.log('地址', process.env.NODE_ENV)
 ReactDOM.render(<App />, document.getElementById('root'));
