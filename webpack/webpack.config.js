@@ -19,6 +19,12 @@ module.exports = {
                 '@babel/preset-react' //引入babel-react 
               ]
           }
+        },{
+          test: /\.css$/,
+          use: ['style-loader','css-loader']
+        },{
+          test: /\.less$/,
+          use: ['style-loader','css-loader','less-loader']
         }
     ]
   },
