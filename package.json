@@ -16,7 +16,7 @@
   "author": "yx",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "electron": "^2.0.18",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
