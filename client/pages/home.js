@@ -1,9 +1,10 @@
 import React from 'react';
+import './home.less';
 
 export default class Home extends React.Component {
   render (){
     return (
-      <div>
+      <div className='home'>
         首页123
       </div>
     )

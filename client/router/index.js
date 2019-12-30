@@ -1,12 +1,12 @@
 import { HashRouter, Route, Switch, Link } from "react-router-dom";
 import React from 'react';
 import Home from '../pages/home';
-import Detail from '../pages/detail';
+import Detail from '../pages/detail.js';
 
 const BasicRoute = () => {
   return (
     <HashRouter>
-      <div className='root'>
+      <div className="root">
         <nav>
           <ul>
             <li>

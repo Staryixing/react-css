@@ -21,10 +21,24 @@ module.exports = {
           }
         },{
           test: /\.css$/,
-          use: ['style-loader','css-loader']
-        },{
+          use: [
+            require.resolve('style-loader'),
+            {
+              loader: require.resolve('css-loader'),
+              options: {
+                modules: {
+                  mode: 'local',
+                  localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                  hashPrefix: 'my-custom-hash'
+                }
+              }
+            }
+          ]
+        },
+        {
           test: /\.less$/,
-          use: ['style-loader','css-loader','less-loader']
+          exclude: [/node_modules/],
+          use:['style-loader','css-loader','less-loader']
         }
     ]
   },
