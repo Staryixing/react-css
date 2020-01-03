@@ -5,10 +5,10 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config webpack/webpack.config.js",
-    "electron": "electron .",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.config.js",
-    "dev:test": "cross-env NODE_ENV=test webpack-dev-server --config webpack/webpack.config.js"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.dev.js",
+    "dev:test": "cross-env NODE_ENV=test webpack-dev-server --config webpack/webpack.dev.js",
+    "build": "webpack --config webpack/webpack.pro.js",
+    "electron": "electron ."
   },
   "keywords": [
     "ssr"
@@ -42,6 +42,7 @@
     "less-loader": "^5.0.0",
     "style-loader": "^1.1.2",
     "webpack": "^4.28.3",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-merge": "^4.2.2"
   }
 }

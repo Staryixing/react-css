@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -20,7 +19,7 @@ module.exports = {
               ]
           }
         },{
-          test: /\.css$/,
+          test: /\.(less|css)$/,
           use: [
             require.resolve('style-loader'),
             {
@@ -32,13 +31,9 @@ module.exports = {
                   hashPrefix: 'my-custom-hash'
                 }
               }
-            }
+            },
+            require.resolve('less-loader')
           ]
-        },
-        {
-          test: /\.less$/,
-          exclude: [/node_modules/],
-          use:['style-loader','css-loader','less-loader']
         }
     ]
   },
@@ -50,20 +45,16 @@ module.exports = {
     filename: '[name].bundle.[hash].js'
   },
   plugins: [
-    new CleanWebpackPlugin(),  //清空build文件
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../client/public/index.html'),
       hash: true, // 会在打包好的bundle.js后面加上hash串
       filename: 'index.html'
-    }),
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
     })
   ],
-  devServer: {
-    port: 9000,
-    hot:true
-  },
+  // devServer: {
+  //   port: 9000,
+  //   hot:true
+  // },
   // mode: 'production'
   // mode: 'development'
 }
