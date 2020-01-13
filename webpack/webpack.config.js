@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+
 module.exports = {
   entry: {
     main: path.join(__dirname, '../client/index.js')
@@ -9,7 +10,7 @@ module.exports = {
   module: {
     rules: [
         {
-          test: /\.js$/,
+          test: /\.(js|jsx)$/,
           exclude: /(node_modules|bower_components)/,
           loader: 'babel-loader',
           options: {
@@ -38,7 +39,11 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['*','.js', '.jsx']
+    extensions: ['*','.js', '.jsx', '.less', '.css'],
+    alias: {
+      "@components": path.resolve(__dirname, '../client/components' ),
+      "@utils": path.resolve(__dirname, '../client/utils')
+    }
   },
   output: {
     path: path.join(__dirname, '../build'),
