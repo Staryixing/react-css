@@ -57,9 +57,9 @@ export default class Detail extends React.Component {
         return counter++
       }
     })()
-    console.log(uniqueInteger());
-    console.log(uniqueInteger());
-    console.log(uniqueInteger());
+    // console.log(uniqueInteger()); 1
+    // console.log(uniqueInteger()); 2
+    // console.log(uniqueInteger()); 3
     function factorial(n){
       if(isFinite(n)&&n>0&&n==Math.round(n)){
         if(!(n in factorial)) factorial[n] = n*factorial(n-1);
@@ -126,6 +126,77 @@ export default class Detail extends React.Component {
         reset: function(){n=0}
       }
     }
+    var c = counter(), d = counter()
+    // console.log('c', c.count())
+    // console.log('c', c.count())
+    // console.log('d', d.count())
+    // c.reset()
+    // console.log("c", c.count());
+
+    function counter(n){
+      return {
+        // 属性getter方法返回并给私有计数器var递增1
+        get count(){return n++;},
+        // 属性set不允许n递减
+        set count(m){
+          if(m>n) n = m;
+          else throw Error("conut can only be set to a larger value")
+        }
+      }
+    }
+    var c = counter(100)
+    console.log("c", c.count); 
+    console.log("c", c.count); 
+    c.count = 200
+    c.count
+    c.count = 202
+
+    function addPrivateProperty(o, name, predicate){
+      console.log('arguments', arguments.length)
+      var value;
+      o["get" + name] = function(){return value}
+      o["set" + name] = function(v){
+        if (predicate && !predicate(v)) {
+          throw Error("set"+ name+ ": invalid value" + v)
+        }else value = v
+      }
+    }
+    var o = {}
+    addPrivateProperty(o,"Name", function(x) {return typeof x == "string"})
+    addPrivateProperty(o,"Sex", function(x) {return typeof x == "string"})
+    // o.setName("Frank")
+    // o.setSex("female")
+    // console.log(o.getName())
+    // console.log(o, 'o')
+    
+
+    // call apply bind
+      // bind的实现方式
+    function bind(f,o){
+      if(f.bind) return f.bind(o)
+      else return function(){
+        return f.apply(o, arguments)
+      }
+    } 
+    if(!Function.prototype.bind){
+      Function.prototype.bind = function(o /*, args */){
+        var self = this, boundArgs = arguments;
+        return function(){
+          var agrs = [],i;
+          for(i=1; i<boundArgs.length; i++ ) agrs.push(boundArgs[i]);
+          for (i = 0; i < arguments.length; i++) agrs.push(arguments[i]);
+          return self.apply(o, args)
+        }
+      }
+    }
+    var x = 4;
+    function f(y){return this.x + y}
+    var o = {x: 1}
+    var g = f.bind(o)
+    console.log(g(2), '111')
+
+    
+
   }
   
   render (){
