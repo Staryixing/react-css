@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './home.less';
-import UIButton from '@components/Button/Button.jsx';
+import Conuter from '@components/Counter';
 export default class Home extends React.Component {
   constructor(props){
     super(props)
@@ -13,7 +13,7 @@ export default class Home extends React.Component {
         首页123
         <div className={styles.device}>
           首页啊
-          <UIButton />
+          <Conuter />
         </div>
       </div>
     )
