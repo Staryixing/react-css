@@ -1,5 +1,6 @@
 import React from 'react';
-import { prototype } from 'events';
+import { Message } from 'message';
+
 // import styles from './detail.css'
 export default class Detail extends React.Component {
   constructor(props){
@@ -198,13 +199,16 @@ export default class Detail extends React.Component {
     
 
   }
-  
+  successHandle(){
+    Message.success('新增成功')
+  }
   render (){
     return (
       <div>
         详情
         <div>
           物业管理
+          <div onClick={this.successHandle}>点击</div>
         </div>
       </div>
     )
