@@ -1,8 +1,7 @@
 import { HashRouter, Route, Switch } from "react-router-dom";
 import React from 'react';
 import Login from '../pages/Login/login';
-import Home from '../pages/home';
-
+import Home from '../pages/Home/home';
 
 const BasicRoute = () => {
   return (

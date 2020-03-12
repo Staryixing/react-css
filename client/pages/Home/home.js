@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from "react-router-dom";
-import Detail from './detail.js';
-import User from './user.jsx';
+import Detail from '../detail.js';
+import User from '../user.jsx';
 import styles from './home.less';
 
 export default class Home extends React.Component {
