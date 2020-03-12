@@ -1,7 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 
 module.exports = {
   entry: {
@@ -14,28 +12,64 @@ module.exports = {
           exclude: /(node_modules|bower_components)/,
           loader: 'babel-loader',
           options: {
-            presets: [
-                '@babel/preset-env',//引入babel
-                '@babel/preset-react' //引入babel-react 
-              ]
+            // babel的配置放在这里也可行
+            // presets: [
+            //     '@babel/preset-env',//引入babel
+            //     '@babel/preset-react' //引入babel-react 
+            // ]
           }
-        },{
-          test: /\.(less|css)$/,
+        },
+        {
+          // 编译css 为全局样式没有模块化(这样处理了andt的全局样式的冲突)
+          test: /\.css$/,
           use: [
-            require.resolve('style-loader'),
-            {
-              loader: require.resolve('css-loader'),
-              options: {
-                modules: {
-                  mode: 'local',
-                  localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                  hashPrefix: 'my-custom-hash'
-                }
-              }
-            },
-            require.resolve('less-loader')
+              {loader: 'style-loader'},
+              {
+                  loader:'css-loader',
+                  options:{
+                    modules:{
+                      mode: "global",
+                    }
+                  }
+              },
+          ]
+        },{
+          // 编译less 使用了css modules
+          test: /\.less$/,
+          use: [
+              {loader: 'style-loader'},
+              {
+                  loader:'css-loader',
+                  options:{
+                      modules:{
+                        mode: "local",
+                        localIdentName: '[name]__[local]__[hash:base64:5]',
+                      }
+                  }
+              },
+              {loader: 'less-loader'}
           ]
         }
+        
+        // {
+        //   test: /\.(less|css)$/,
+        //   // exclude: /(node_modules|bower_components)/,
+        //   use: [
+        //     require.resolve('style-loader'),
+        //     {
+        //       loader: require.resolve('css-loader'),
+        //       options: {
+        //         importLoaders: 1,
+        //         modules: {
+        //           // 为了不与andt的按需引入样式冲突，这里mode设置为
+        //           // mode: 'global',
+        //           mode: "local",
+        //           localIdentName: '[name]__[local]__[hash:base64:5]',
+        //         }
+        //       }
+        //     },
+        //   ]
+        // }
     ]
   },
   resolve: {
@@ -50,11 +84,11 @@ module.exports = {
     filename: '[name].bundle.[hash].js'
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../client/public/index.html'),
-      hash: true, // 会在打包好的bundle.js后面加上hash串
-      filename: 'index.html'
-    })
+      new HtmlWebpackPlugin({
+        template: path.join(__dirname, '../client/public/index.html'),
+        hash: true, // 会在打包好的bundle.js后面加上hash串
+        filename: 'index.html'
+      })
   ],
   // devServer: {
   //   port: 9000,

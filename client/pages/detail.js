@@ -1,6 +1,6 @@
 import React from 'react';
 import { prototype } from 'events';
-// import styles from './detail.css'
+import styles from './detail.less';
 export default class Detail extends React.Component {
   constructor(props){
     super(props)
@@ -204,7 +204,7 @@ export default class Detail extends React.Component {
       <div>
         详情
         <div>
-          物业管理
+          物业管理详情
         </div>
       </div>
     )

@@ -1,0 +1,17 @@
+// 关于babel的配置都放在这里
+{
+    "presets": [
+        "@babel/preset-env",//引入babel
+        "@babel/preset-react" //引入babel-react 
+    ],
+    // 配置antd样式的按需引入
+    "plugins": [
+        ["import", {
+          "libraryName": "antd",
+          "libraryDirectory": "es",
+          "style": "css" // `style: true` 会加载 less 文件
+        }],
+        // 在class类中使用es6语法
+        ["@babel/plugin-proposal-class-properties",{"loose": true}]
+      ]
+}

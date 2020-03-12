@@ -1,6 +1,9 @@
 import React from 'react';
+import { Route, Switch, Redirect } from "react-router-dom";
+import Detail from './detail.js';
+import User from './user.jsx';
 import styles from './home.less';
-import UIButton from '@components/Button/Button.jsx';
+
 export default class Home extends React.Component {
   constructor(props){
     super(props)
@@ -10,10 +13,19 @@ export default class Home extends React.Component {
   render (){
     return (
       <div className={styles.home}>
-        首页123
-        <div className={styles.device}>
-          首页啊
-          <UIButton />
+        <div className={styles.nav}>
+          首页
+        </div>
+        <div className={styles.main}>
+          <header>头部</header>
+          <main>
+            <Switch>
+              <Route path="/home/detail" component={Detail}></Route>
+              <Route path="/home/user" component={User}></Route>
+              <Redirect to="/home/detail"/>
+            </Switch>
+          </main>
+          <footer></footer>
         </div>
       </div>
     )
