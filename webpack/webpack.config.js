@@ -50,33 +50,14 @@ module.exports = {
               {loader: 'less-loader'}
           ]
         }
-        
-        // {
-        //   test: /\.(less|css)$/,
-        //   // exclude: /(node_modules|bower_components)/,
-        //   use: [
-        //     require.resolve('style-loader'),
-        //     {
-        //       loader: require.resolve('css-loader'),
-        //       options: {
-        //         importLoaders: 1,
-        //         modules: {
-        //           // 为了不与andt的按需引入样式冲突，这里mode设置为
-        //           // mode: 'global',
-        //           mode: "local",
-        //           localIdentName: '[name]__[local]__[hash:base64:5]',
-        //         }
-        //       }
-        //     },
-        //   ]
-        // }
     ]
   },
   resolve: {
     extensions: ['*','.js', '.jsx', '.less', '.css'],
     alias: {
       "@components": path.resolve(__dirname, '../client/components' ),
-      "@utils": path.resolve(__dirname, '../client/utils')
+      "@utils": path.resolve(__dirname, '../client/utils'),
+      "@server": path.resolve(__dirname, '../client/server')
     }
   },
   output: {

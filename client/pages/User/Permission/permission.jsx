@@ -1,17 +1,17 @@
 import React from 'react';
 
-class User extends React.Component{
+class Permission extends React.Component{
   constructor(props){
     super(props)
-
+    
   }
   render(){
     return (
       <div>
-        用户管理
+        权限管理
       </div>
     )
   }
 }
 
-export default User
+export default Permission

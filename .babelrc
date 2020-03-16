@@ -12,6 +12,15 @@
           "style": "css" // `style: true` 会加载 less 文件
         }],
         // 在class类中使用es6语法
-        ["@babel/plugin-proposal-class-properties",{"loose": true}]
+        ["@babel/plugin-proposal-class-properties",{"loose": true}],
+        // 解决 regeneratorRuntime is not defined 问题 
+        ["@babel/plugin-transform-runtime",{
+          "absoluteRuntime": false,
+          "corejs": false,
+          "helpers": true,
+          "regenerator": true,
+          "useESModules": false,
+          "version": "7.0.0-beta.0"
+        }]
       ]
 }
