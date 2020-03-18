@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { Button } from 'antd';
+import { inTitle,deTitle } from '@models/action.js'
 class Role extends React.Component{
   constructor(props){
     super(props)
@@ -11,16 +12,26 @@ class Role extends React.Component{
 
   componentDidMount(){
    // let { setPageTitle,setRoleList } = this.props
-
-
   }
-
+  add =()=>{
+    let { inTitle } = this.props;
+    inTitle({
+      a: 1
+    })
+  }
+  del = ()=> {
+    let { deTitle } = this.props
+    deTitle({})
+  }
   render(){
-    let { pageTitle } = this.props;
+    let { title,size } = this.props.titleModel;
     return (
       <div>
         角色管理
-        <h1>{pageTitle}</h1>
+        <h1>{title}</h1>
+        <h1>{size}</h1>
+        <Button onClick={this.add}>+</Button>
+        <Button onClick={this.del}>-</Button>
       </div>
     )
   }
@@ -28,20 +39,24 @@ class Role extends React.Component{
 
 const mapStateToProps = (state)=> {
   return {
-    pageTitle: state.pageTitle,
-    // userList: state.infoList
+    titleModel: state.titleModel,
   }
 }   
 
 const mapDispatchToProps = (dispatch,ownProps) => {
   return {
-    setPageTitle(){
-
+    inTitle(data){
+      dispatch(
+        inTitle(data)
+      )
     },
-    // setInfoList(){
-
-    // }
+    deTitle(data){
+      dispatch(
+        deTitle(data)
+      )
+    } 
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Role)
+// export default Role

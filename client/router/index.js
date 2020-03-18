@@ -8,8 +8,10 @@ const BasicRoute = () => {
     <HashRouter>
       <div>
         <Switch>
-          <Route exact path="/" component={Login}></Route>
-          <Route path="/home" component={Home}></Route>
+          {/* <Route exact path="/" component={Login}></Route>
+          <Route path="/home" component={Home}></Route> */}
+          <Route exact path="/" render={props=> <Login {...props} />}></Route>
+          <Route path="/home" render={props=> <Home {...props} />}></Route>
         </Switch>
       </div>
     </HashRouter>

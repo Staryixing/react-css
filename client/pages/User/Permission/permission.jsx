@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 class Permission extends React.Component{
   constructor(props){
@@ -6,12 +7,22 @@ class Permission extends React.Component{
     
   }
   render(){
+    let { title,size } = this.props.titleModel;
     return (
       <div>
-        权限管理
+        <div>权限管理</div>
+        <h1>{title}</h1>
       </div>
     )
   }
 }
 
-export default Permission
+const mapStateToProps = (state)=> {
+  return {
+    titleModel: state.titleModel
+  }
+}
+const mapDispatchToProps = ()=> {
+  return {}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Permission)

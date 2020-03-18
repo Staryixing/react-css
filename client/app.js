@@ -4,7 +4,7 @@ import BasicRoute from './router/index';
 class App extends Component {
   render(){
     return (
-      <BasicRoute />
+        <BasicRoute />
     )
   }
 }

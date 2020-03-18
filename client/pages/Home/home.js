@@ -13,7 +13,7 @@ export default class Home extends React.Component {
 
   }
   handleClick(e){
-    console.log('e',e)
+    // console.log('e',e)
   }
   jumpto(link){
     this.props.history.push(link)
@@ -46,9 +46,12 @@ export default class Home extends React.Component {
           <header className={styles.header}>头部</header>
           <main>
             <Switch>
-              <Route path="/home/user" component={User}></Route>
+          <Route path="/home/user" render={props=> <User {...props} />}></Route>
+          <Route path="/home/role" render={props=> <Role {...props} />}></Route>
+          <Route path="/home/permission" render={props=> <Permission {...props} />}></Route>
+              {/* <Route path="/home/user" component={User}></Route>
               <Route path="/home/role" component={Role}></Route>
-              <Route path="/home/permission" component={Permission}></Route>
+              <Route path="/home/permission" component={Permission}></Route> */}
               <Redirect to="/home/user"/>
             </Switch>
           </main>

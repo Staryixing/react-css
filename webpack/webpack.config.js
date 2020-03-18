@@ -57,7 +57,8 @@ module.exports = {
     alias: {
       "@components": path.resolve(__dirname, '../client/components' ),
       "@utils": path.resolve(__dirname, '../client/utils'),
-      "@server": path.resolve(__dirname, '../client/server')
+      "@server": path.resolve(__dirname, '../client/server'),
+      "@models": path.resolve(__dirname, '../client/models')
     }
   },
   output: {

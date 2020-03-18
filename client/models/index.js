@@ -1,17 +1,15 @@
-import { createStore } from 'redux';
-// import reducers from './reducers';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import titleModel from './titleModel.js';
 
-function pageTitle(state = {pageTitle: '首页'},action){
-    const pageTitle = state.pageTitle;
-    switch (action.type) {
-        case 'increase':
-          return { pageTitle: pageTitle + 1 }
-        default:
-          return state
-      }
-}
+// 合并reducer
+const reducers = combineReducers({
+  titleModel
+})
 
+// 生成store
 let store = createStore(
-    pageTitle
+    reducers,
+    applyMiddleware(thunk)
 )
 export default store;
