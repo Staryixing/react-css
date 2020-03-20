@@ -34,6 +34,17 @@ class GlobalServers extends ApiServer{
             defaultAlert
         })
     }
+    getRole = ({
+        params = {},
+        headers = {},
+        defaultAlert = true
+    })=>{
+        return this.get(API_HOST+'/role',{
+            params,
+            headers,
+            defaultAlert
+        })
+    }
 }
 
 export default new GlobalServers()

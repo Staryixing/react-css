@@ -8,6 +8,17 @@ module.exports = {
   module: {
     rules: [
         {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8192
+              }
+            }
+          ]
+        },
+        {
           test: /\.(js|jsx)$/,
           exclude: /(node_modules|bower_components)/,
           loader: 'babel-loader',
@@ -58,11 +69,14 @@ module.exports = {
       "@components": path.resolve(__dirname, '../client/components' ),
       "@utils": path.resolve(__dirname, '../client/utils'),
       "@server": path.resolve(__dirname, '../client/server'),
-      "@models": path.resolve(__dirname, '../client/models')
+      "@models": path.resolve(__dirname, '../client/models'),
+      "@assets": path.resolve(__dirname, '../client/assets')
     }
   },
   output: {
     path: path.join(__dirname, '../build'),
+    publicPath: "",
+    chunkFilename: "[name].js",
     filename: '[name].bundle.[hash].js'
   },
   plugins: [
@@ -72,6 +86,21 @@ module.exports = {
         filename: 'index.html'
       })
   ],
+  optimization: {
+    runtimeChunk: {
+      name: "mainfest"
+    },
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          priority: -20,
+          chunks: "all"
+        }
+      }
+    }
+  },
   // devServer: {
   //   port: 9000,
   //   hot:true

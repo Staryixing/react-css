@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Switch, Redirect } from "react-router-dom";
 import { Menu, Icon } from 'antd';
-import User from '../User/user.jsx';
-import Role from '../User/Role/role';
-import Permission from '../User/Permission/permission';
+const User = React.lazy(() => import('../User/user.jsx'));
+const Role = React.lazy(() => import('../User/Role/role'));
+const Permission = React.lazy(() => import('../User/Permission/permission'));
+// import User from '../User/user.jsx';
+// import Role from '../User/Role/role';
+// import Permission from '../User/Permission/permission';
+
 import styles from './home.less';
 const { SubMenu } = Menu;
 
@@ -45,15 +49,17 @@ export default class Home extends React.Component {
         <div className={styles.main}>
           <header className={styles.header}>头部</header>
           <main>
-            <Switch>
-          <Route path="/home/user" render={props=> <User {...props} />}></Route>
-          <Route path="/home/role" render={props=> <Role {...props} />}></Route>
-          <Route path="/home/permission" render={props=> <Permission {...props} />}></Route>
-              {/* <Route path="/home/user" component={User}></Route>
-              <Route path="/home/role" component={Role}></Route>
-              <Route path="/home/permission" component={Permission}></Route> */}
-              <Redirect to="/home/user"/>
-            </Switch>
+            <Suspense>
+              <Switch>
+                <Route path="/home/user" render={props=> <User {...props} />}></Route>
+                <Route path="/home/role" render={props=> <Role {...props} />}></Route>
+                <Route path="/home/permission" render={props=> <Permission {...props} />}></Route>
+                {/* <Route path="/home/user" component={User}></Route>
+                <Route path="/home/role" component={Role}></Route>
+                <Route path="/home/permission" component={Permission}></Route> */}
+                <Redirect to="/home/user"/>
+              </Switch>
+            </Suspense>
           </main>
           <footer></footer>
         </div>

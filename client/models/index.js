@@ -1,10 +1,12 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import titleModel from './titleModel.js';
+import roleModel from './roleModel';
 
 // 合并reducer
 const reducers = combineReducers({
-  titleModel
+  titleModel,
+  roleModel
 })
 
 // 生成store

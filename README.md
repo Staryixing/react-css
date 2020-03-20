@@ -2,12 +2,16 @@
     react项目（没有利用脚手架）
 
 ## 项目构建
+1. npm init
+2. 引入react、react-dom、react-router-dom
+3. 配置webpack
 
 ## 项目技术库
 #### client端
 1. react、react-dom、react-router-dom
 2. css、less
 3. antd UI库
+4. redux、react-redux库
 4. webpack配置
     * 
 

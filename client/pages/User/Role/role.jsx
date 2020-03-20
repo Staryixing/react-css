@@ -12,6 +12,16 @@ class Role extends React.Component{
 
   componentDidMount(){
    // let { setPageTitle,setRoleList } = this.props
+   this.foo()
+  }
+  foo(){
+    function Star(name, age){
+      this.name = name;
+      this.age = age
+    }
+    Star.sex = '女'
+    console.log(Star.name,'name')
+    console.log(Star.sex,'sex')
   }
   add =()=>{
     let { inTitle } = this.props;

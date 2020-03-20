@@ -21,6 +21,8 @@
           "regenerator": true,
           "useESModules": false,
           "version": "7.0.0-beta.0"
-        }]
+        }],
+        // 动态import导入
+        ["@babel/plugin-syntax-dynamic-import"]
       ]
 }
