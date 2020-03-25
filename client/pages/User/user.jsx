@@ -25,6 +25,7 @@ class User extends React.Component{
       ],
       total: 0,
       pageSize: 10,
+      searchName: '',
       pageNum: 1,
       visible: false,
       userForm: {
@@ -33,11 +34,16 @@ class User extends React.Component{
         account: '',
         pwd: '',
       },
-      selectRoleId: ''
+      selectRoleId: '',
     }
     this.addRole = this.addRole.bind(this);
     this.handleOk = this.handleOk.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+  }
+  emailChange = ()=> {
+    this.setState({
+      email1: '12@qq.com'
+    })
   }
   componentDidMount(){
     let { queryRoleList } = this.props;
@@ -65,6 +71,13 @@ class User extends React.Component{
   // 分页
   pagChange = (num)=>{
     this.setState({ pageNum: num }, ()=> { this.query() })
+  }
+  // 查询
+  searchChange = (e)=> {
+    let value = e.target.value;
+    this.setState({
+      searchName: value
+    })
   }
   // 新增、编辑
   addRole(){
@@ -143,20 +156,25 @@ class User extends React.Component{
         }
       }
     ]
+    const rowSelection = {
+      onChange:(value, index) => {
+       // console.log('123', value, index)
+      }
+    };
     const { dataList } = this.props.roleModel;
     return (
       <div className={styles.root}>
         <div className={styles.search}>
           <div className={styles.searchUnit}>
             <label className={styles.label}>账户名</label>
-            <Input className={styles.input}/>
+            <Input className={styles.input} value={this.state.searchName} onChange={(e)=>this.searchChange(e)}/>
           </div>
           <Button type="primary" className='ml10'>查询</Button>
           <Button className='ml10'>重置</Button>
           <Button className='ml10' onClick={this.addRole}>新增</Button>  
         </div>
         <div className={styles.container}>
-          <YTable columns={columns} dataSource = {this.state.dataList} />
+          <YTable rowSelection={rowSelection} columns={columns} dataSource = {this.state.dataList} />
           <Pagination total={this.state.total} className={styles.pagina} onChange={this.pagChange}/>
         </div>
 

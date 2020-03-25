@@ -109,15 +109,13 @@ window.fetch = function (url, params, timeOut) {
     const fetchPromise   = oldFetchfn(url, params);
     const timeoutPromise = new Promise((resolve, reject) => {
         setTimeout(() => {
-            // 网络超时之后，如何处理
-            message.error('请求超时，请稍后重试')
+            // 网络超时之后 抛出错误 到processError
             reject(new Error('请求超时，请稍后重试'));
-        }, 50000);
+        }, 3000);
     });
     return Promise.race([fetchPromise, timeoutPromise]);
 };
 class HttpHelper{
-    
     static get(turl, { params, headers, defaultAlert }){
         let url = turl;
         if(params){

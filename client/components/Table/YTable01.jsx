@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './YTable.less';
 import PropTypes from 'prop-types';
 /**
- * 使用getDerivedStateFromProps实现
+ * 使用componentWillReceiveProps实现
  */
 class YTable extends React.Component{
 		constructor(props){
@@ -10,52 +10,46 @@ class YTable extends React.Component{
 			this.state = {
 				rowAllSelect: false,
 				length: '',
-				dataList: [],
-				selectList: []
+				dataList: this.props.dataSource
 			}
 		}
-		static getDerivedStateFromProps(props, state){
-			function getSelect(arr){
-				let selectList = [];
-				arr.forEach(el => {
-					selectList.push({
-						selected: false
-					})	
+		componentWillReceiveProps(nextProps){
+			if(nextProps.dataSource !== this.props.dataSource){
+				nextProps.dataSource.forEach(el => {
+					el.selected = false
 				})
-				return selectList
+				this.setState({
+					dataList: nextProps.dataSource
+				})
 			}
-			if(props.dataSource !== state.dataList){
-				return {
-					selectList: getSelect(props.dataSource),
-					dataList: props.dataSource
-				}
-			}
-			return null
 		}
 		// 单个选择
 		selectChange(e, index){
 			let value = e.target.checked;
 			this.props.rowSelection.onChange(value, index);
-			let { selectList } = this.state;
-			selectList[index].selected = value;
+			let { dataList} = this.state;
+			dataList[index].selected = value;
 			this.setState({
-				selectList: selectList
-			},() => {
-					let foo = this.state.selectList.every(val => {
-							return val.selected
-					})
-					foo? this.setState({ rowAllSelect: true }):this.setState({ rowAllSelect: false })
+				dataList
+			},()=> {
+				let foo = this.state.dataList.every(val => {
+						return val.selected
+				})
+				if(foo) this.setState({ rowAllSelect: true })
+				else{
+					this.setState({ rowAllSelect: false })
+				}
 			})
 		}
 		// total选择
 		allSelectChange(e){
 			let value = e.target.checked;
-			let { selectList} = this.state;
-			selectList.forEach(el => {
+			let { dataList} = this.state;
+			dataList.forEach(el => {
 				el.selected = value
 			})
 			this.setState({	
-				selectList,
+				dataList,
 				rowAllSelect: value
 			})
 		}
@@ -69,7 +63,7 @@ class YTable extends React.Component{
 					this.props.rowSelection?<td>
 						<div className={styles.checkbox}>
 							<input type="checkbox" className={styles.check_orige} 
-								checked={this.state.selectList[index].selected}
+								checked={list.selected}
 								onChange={(e)=>this.selectChange(e, index)}/>
 						</div>
 					</td>:null

@@ -1,52 +1,26 @@
 import React from 'react';
 import styles from './YTable.less';
 import PropTypes from 'prop-types';
+import memoize from 'memoize-one';
 /**
- * 使用getDerivedStateFromProps实现
+ * 在render中设置变量， 变成了单选
  */
 class YTable extends React.Component{
 		constructor(props){
 			super(props)
 			this.state = {
 				rowAllSelect: false,
-				length: '',
-				dataList: [],
-				selectList: []
 			}
 		}
-		static getDerivedStateFromProps(props, state){
-			function getSelect(arr){
-				let selectList = [];
-				arr.forEach(el => {
-					selectList.push({
-						selected: false
-					})	
-				})
-				return selectList
-			}
-			if(props.dataSource !== state.dataList){
-				return {
-					selectList: getSelect(props.dataSource),
-					dataList: props.dataSource
-				}
-			}
-			return null
-		}
+		
 		// 单个选择
 		selectChange(e, index){
-			let value = e.target.checked;
-			this.props.rowSelection.onChange(value, index);
-			let { selectList } = this.state;
-			selectList[index].selected = value;
 			this.setState({
-				selectList: selectList
-			},() => {
-					let foo = this.state.selectList.every(val => {
-							return val.selected
-					})
-					foo? this.setState({ rowAllSelect: true }):this.setState({ rowAllSelect: false })
+				selectValue: e.target.value,
+				selectIndex: index
 			})
 		}
+
 		// total选择
 		allSelectChange(e){
 			let value = e.target.checked;
@@ -59,17 +33,33 @@ class YTable extends React.Component{
 				rowAllSelect: value
 			})
 		}
+
 		/**
 		 * 渲染表格的数据的行
 		 * @param {*} list 表格的每行数据
 		 */
+		getSelect = memoize((arr, value, index) =>{
+			let selectList = [];
+			arr.forEach(el => {
+				selectList.push({
+					selected: false
+				})	
+			})
+			if(value && index){
+				selectList[index].selected = value
+			}
+			return selectList
+		})
+
 		readerTd(list, index){
+			const selectList = this.getSelect(this.props.dataSource, this.state.selectValue, this.state.selectIndex);
+			
 			return <tr key={list.id}>
 				{
 					this.props.rowSelection?<td>
 						<div className={styles.checkbox}>
 							<input type="checkbox" className={styles.check_orige} 
-								checked={this.state.selectList[index].selected}
+								checked={selectList[index].selected}
 								onChange={(e)=>this.selectChange(e, index)}/>
 						</div>
 					</td>:null
@@ -103,20 +93,12 @@ class YTable extends React.Component{
 			)
 		}
     render(){
-				
+				const dataList = this.props.dataSource;
         return (
 						<table className={styles.table}>
 							<thead className={styles.thead}>
 								<tr>
-										{
-											this.props.rowSelection?<th>
-												<div className={styles.checkbox}>
-													<input type="checkbox" id="test" className={styles.check_orige} 
-														checked={this.state.rowAllSelect}
-														onChange={(e)=>this.allSelectChange(e)}/>
-												</div>
-											</th>:null
-										}
+										<th>单选</th>
 										{
 											this.props.columns.map(item => 
 												{	return this.renderTr(item) }
@@ -126,7 +108,7 @@ class YTable extends React.Component{
 							</thead>
 							<tbody>
 									{
-										this.state.dataList.map((i, index) =>{
+										dataList.map((i, index) =>{
 											return this.readerTd(i, index)
 										})
 									}
