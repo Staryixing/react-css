@@ -1,13 +1,12 @@
-import React from 'react';
+import React,{Component, createRef, forwardRef} from 'react';
+import styles from './Button.less';
 
-class UIButton extends React.Component{
+class YButton extends React.PureComponent{
   render(){
     return (
-      <div>
-        按钮组件123
-      </div>
+      <div className={styles.cont}>{this.props.children}</div>
     )
   }
 }
 
-export default UIButton
+export default YButton

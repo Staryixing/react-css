@@ -4,9 +4,8 @@ import { Menu, Icon } from 'antd';
 const User = React.lazy(() => import('../User/user.jsx'));
 const Role = React.lazy(() => import('../User/Role/role'));
 const Permission = React.lazy(() => import('../User/Permission/permission'));
-// import User from '../User/user.jsx';
-// import Role from '../User/Role/role';
-// import Permission from '../User/Permission/permission';
+const DashBoard = React.lazy(() => import('../DashBoard/dashBoard.tsx'));
+
 
 import styles from './home.less';
 const { SubMenu } = Menu;
@@ -32,31 +31,38 @@ export default class Home extends React.Component {
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             mode="inline">
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="team" />
-                <span>权限管理</span>
-              </span>
-            }>
-            <Menu.Item key="1" onClick={() =>this.jumpto('/home/user')}>用户管理</Menu.Item>
-            <Menu.Item key="2" onClick={() =>this.jumpto('/home/role')}>角色管理</Menu.Item>
-            <Menu.Item key="3" onClick={() =>this.jumpto('/home/permission')}>权限管理</Menu.Item>
-          </SubMenu>
-        </Menu>
+            <SubMenu
+              key="sub1"
+              title={
+                <span>
+                  <Icon type="team" />
+                  <span>权限管理</span>
+                </span>
+              }>
+              <Menu.Item key="1" onClick={() =>this.jumpto('/home/user')}>用户管理</Menu.Item>
+              <Menu.Item key="2" onClick={() =>this.jumpto('/home/role')}>角色管理</Menu.Item>
+              <Menu.Item key="3" onClick={() =>this.jumpto('/home/permission')}>权限管理</Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub2" 
+              title={
+                <span>
+                  <Icon type="team" />
+                  <span>首页</span>
+                </span>
+              }>
+              <Menu.Item key="4" onClick={() =>this.jumpto('/home/dashboard')}>仪表盘</Menu.Item>
+            </SubMenu>
+          </Menu>
         </div>
         <div className={styles.main}>
           <header className={styles.header}>头部</header>
           <main>
-            <Suspense>
+            <Suspense fallback={<div>loading...</div>}>
               <Switch>
                 <Route path="/home/user" render={props=> <User {...props} />}></Route>
                 <Route path="/home/role" render={props=> <Role {...props} />}></Route>
                 <Route path="/home/permission" render={props=> <Permission {...props} />}></Route>
-                {/* <Route path="/home/user" component={User}></Route>
-                <Route path="/home/role" component={Role}></Route>
-                <Route path="/home/permission" component={Permission}></Route> */}
+                <Route path="/home/dashboard" render={props=> <DashBoard {...props} />}></Route>
                 <Redirect to="/home/user"/>
               </Switch>
             </Suspense>

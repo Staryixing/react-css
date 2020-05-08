@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "outDir": "build/dist",
+        "strictNullChecks": true,
+        "moduleResolution": "node", // 指定模块解析方式
+        "allowSyntheticDefaultImports": true, // 允许引入没有默认导出的模块
+        "experimentalDecorators": true, // 启用实验性的ES装饰器（如connect）
+        "jsx": "preserve", // jsx的编译方式
+        "noUnusedParameters": true, // 未使用的参数将报错
+        "noUnusedLocals": true, // 未使用的本地变量将报错
+        "target": "es6", // 输出的es版本
+        "allowJs": true,// 允许有js版本
+        "lib": [
+            "dom", 
+            "es7"
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./client/*"]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "lib",
+        "es",
+        "dist"
+    ]
+}

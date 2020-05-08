@@ -5,6 +5,7 @@ module.exports = WebpackMerge(WebpackConfig,{
   // mode: 'development',
   devServer: {
     port: 9000,
+    host: '0.0.0.0', // 设置局域网可以访问
     hot:true
   },
   plugins: [

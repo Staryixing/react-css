@@ -1,12 +1,12 @@
+import { devUrl } from '@common/config.js';
 import ApiServer from '../utils/httpRequest/Apiserver';
-const API_HOST = 'http://177h27l110.iok.la/chargepile/dev/admin';
 class GlobalServers extends ApiServer{
     login=({
         params = {},
         headers = {},
         defaultAlert = true
     }) => {
-        return this.post(API_HOST+'/employee/login',{
+        return this.post(devUrl+'/employee/login',{
             params,
             headers,
             defaultAlert
@@ -17,7 +17,7 @@ class GlobalServers extends ApiServer{
         headers = {},
         defaultAlert = true
     })=>{
-        return this.get(API_HOST+'/employee',{
+        return this.get(devUrl+'/employee',{
             params,
             headers,
             defaultAlert
@@ -28,7 +28,7 @@ class GlobalServers extends ApiServer{
         headers = {},
         defaultAlert = true
     })=>{
-        return this.post(API_HOST+'/employee',{
+        return this.post(devUrl+'/employee',{
             params,
             headers,
             defaultAlert
@@ -39,7 +39,7 @@ class GlobalServers extends ApiServer{
         headers = {},
         defaultAlert = true
     })=>{
-        return this.get(API_HOST+'/role',{
+        return this.get(devUrl+'/role',{
             params,
             headers,
             defaultAlert

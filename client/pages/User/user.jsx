@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, Pagination,Modal,Select, message } from 'antd';
+import YTable from 'YTable';
 import styles from './user.less';
 import GlobalServers from '@server/globalServer.js'
-import YTable from '@components/Table/YTable.jsx';
+// import YTable from '@components/Table/YTable.jsx';
 import { setRoleList } from '@models/action.js';
 import editorimg from '@assets/edit.png';
 import deleteimg from '@assets/delete.png';
@@ -47,8 +48,8 @@ class User extends React.Component{
   }
   componentDidMount(){
     let { queryRoleList } = this.props;
-    queryRoleList()
-    this.query()
+    // queryRoleList()
+    // this.query()
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -62,6 +63,7 @@ class User extends React.Component{
       }
     })
     if(res && res.code === 200){
+      console.log('user',JSON.stringify(res.data.rows) )
       this.setState({
         dataList: res.data.rows,
         total: res.data.total

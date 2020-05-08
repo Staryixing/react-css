@@ -1,28 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
-import { inTitle,deTitle } from '@models/action.js'
+import { inTitle,deTitle } from '@models/action.js';
+import CustomTextInput from '@components/Input/YInput.jsx';
+import YButton from '@components/Button/Button.jsx';
 class Role extends React.Component{
   constructor(props){
     super(props)
     this.state = {
 
     }
+    this.inputElement = null;
+    this.ref= React.createRef();
   }
 
   componentDidMount(){
    // let { setPageTitle,setRoleList } = this.props
-   this.foo()
+   
   }
-  foo(){
-    function Star(name, age){
-      this.name = name;
-      this.age = age
-    }
-    Star.sex = '女'
-    console.log(Star.name,'name')
-    console.log(Star.sex,'sex')
-  }
+
   add =()=>{
     let { inTitle } = this.props;
     inTitle({
@@ -38,10 +34,16 @@ class Role extends React.Component{
     return (
       <div>
         角色管理
-        <h1>{title}</h1>
-        <h1>{size}</h1>
-        <Button onClick={this.add}>+</Button>
-        <Button onClick={this.del}>-</Button>
+        <div>
+          <h1>{title}</h1>
+          <Button onClick={this.add}>+</Button>
+          <Button onClick={this.del}>-</Button>
+        </div>
+        <div>
+          <CustomTextInput/>
+          <div>123</div>
+          <YButton ref={this.ref}>click on</YButton>
+        </div>
       </div>
     )
   }
@@ -69,4 +71,3 @@ const mapDispatchToProps = (dispatch,ownProps) => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Role)
-// export default Role

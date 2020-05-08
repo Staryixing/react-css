@@ -60,6 +60,9 @@ module.exports = {
               },
               {loader: 'less-loader'}
           ]
+        },{
+          test: /\.tsx?$/,
+          loader: ['babel-loader', 'ts-loader']
         }
     ]
   },
@@ -70,7 +73,8 @@ module.exports = {
       "@utils": path.resolve(__dirname, '../client/utils'),
       "@server": path.resolve(__dirname, '../client/server'),
       "@models": path.resolve(__dirname, '../client/models'),
-      "@assets": path.resolve(__dirname, '../client/assets')
+      "@assets": path.resolve(__dirname, '../client/assets'),
+      "@common": path.resolve(__dirname, '../client/common')
     }
   },
   output: {

@@ -8,6 +8,7 @@ class Login extends React.PureComponent{
 			super()
 			this.submit = this.submit.bind(this)
 		}
+		
 		componentDidMount(){
 
 		}
@@ -31,6 +32,7 @@ class Login extends React.PureComponent{
 				<div className={styles.root}>
 					<div className={styles.from}>
 						<div>登录界面</div>
+						<input type="checkbox" />
 						<Input placeholder="请输入用户名" style={{ marginTop: 20 }}/>
 						<Input placeholder="请输入密码" style={{ marginTop: 20 }}/>
 						<Button onClick={this.submit} type="primary" className={styles.subbtn}>登录</Button>

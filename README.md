@@ -5,6 +5,7 @@
 1. npm init
 2. 引入react、react-dom、react-router-dom
 3. 配置webpack
+4. 引入ts
 
 ## 项目技术库
 #### client端
